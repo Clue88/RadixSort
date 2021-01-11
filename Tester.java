@@ -10,9 +10,21 @@ public class Tester {
     public static boolean DEBUG = true;
     public static void main(String[] args) {
         if (args.length > 0 && Boolean.parseBoolean(args[0]) == false) DEBUG = false;
-        // String test = "";
+        String test = "";
 
-        
+        test = "Radix.nth(int n, int col)";
+        try {
+            check(test, Radix.nth(12902, 2), 9);
+        } catch(RuntimeException e) {
+            except(test, e);
+        }
+
+        test = "Radix.length(int n)";
+        try {
+            check(test, Radix.length(12902), 5);
+        } catch(RuntimeException e) {
+            except(test, e);
+        }
 
         if (ERR == 0) System.out.println("All good!");
         else if (ERR == 1) System.out.println("Uh oh... 1 error found.");
