@@ -4,6 +4,6 @@ public class Radix {
     }
 
     public static int length(int n) {
-        return ("" + n).length();
+        return (int) Math.log10(n) + 1;
     }
 }
