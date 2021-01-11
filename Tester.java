@@ -26,6 +26,35 @@ public class Tester {
             except(test, e);
         }
 
+        test = "Radix.merge(MyLinkedList original, MyLinkedList[] buckets)";
+        try {
+            MyLinkedList a = new MyLinkedList();
+            MyLinkedList b = new MyLinkedList();
+            MyLinkedList c = new MyLinkedList();
+            MyLinkedList d = new MyLinkedList();
+            MyLinkedList e = new MyLinkedList();
+            MyLinkedList f = new MyLinkedList();
+
+            MyLinkedList[] buckets = {b, c, d, e, f};
+
+            a.add("1");
+            a.add("2");
+            a.add("3");
+
+            for (int i = 0; i < buckets.length; i++) {
+                buckets[i].add("1" + i);
+                buckets[i].add("2" + i);
+                buckets[i].add("3" + i);
+            }
+
+            Radix.merge(a, buckets);
+            check(test, a.toString(), "[1, 2, 3, 10, 20, 30, 11, 21, 31, 12, 22, 32, 13, 23, 33, 14, 24, 34]");
+            check(test, b.toString(), "[]");
+            check(test, e.toString(), "[]");
+        } catch(RuntimeException e) {
+            except(test, e);
+        }
+
         if (ERR == 0) System.out.println("All good!");
         else if (ERR == 1) System.out.println("Uh oh... 1 error found.");
         else System.out.println("Uh oh... " + ERR + " errors found.");
