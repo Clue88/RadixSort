@@ -72,8 +72,6 @@ public class Tester {
             except(test, e);
         }
 
-        
-
         test = "Radix.radixSortSimple(SortableLinkedList data)";
         try {
             Random rng = new Random();
@@ -89,6 +87,27 @@ public class Tester {
                     arOrig[j] = num;
                 }
                 Radix.radixSortSimple(arSort);
+                Arrays.sort(arOrig);
+                check(test, arSort.toString(), Arrays.toString(arOrig), seed);
+            }
+        } catch(RuntimeException e) {
+            except(test, e);
+        }
+
+        test = "Radix.radixSort(SortableLinkedList data)";
+        try {
+            Random rng = new Random();
+            for (int i = 0; i < numTests; i++) {
+                int seed = rng.nextInt();
+                SortableLinkedList arSort = new SortableLinkedList();
+                int[] arOrig = new int[arraySize];
+                Random rand = new Random(seed);
+                for (int j = 0; j < arraySize; j++) {
+                    int num = rand.nextInt() % 1000;
+                    arSort.add(num);
+                    arOrig[j] = num;
+                }
+                Radix.radixSort(arSort);
                 Arrays.sort(arOrig);
                 check(test, arSort.toString(), Arrays.toString(arOrig), seed);
             }

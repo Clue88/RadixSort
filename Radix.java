@@ -55,4 +55,31 @@ public class Radix {
             data.extend(b0);
         }
     }
+
+    public static void radixSort(SortableLinkedList data) {
+        SortableLinkedList positives = new SortableLinkedList();
+        SortableLinkedList negatives = new SortableLinkedList();
+        SortableLinkedList zeroes = new SortableLinkedList();
+
+        for (int i = 0; i < data.size(); i++) {
+            int num = data.get(i);
+            if (num > 0) positives.add(num);
+            else if (num < 0) negatives.add(num * -1);
+            else zeroes.add(num);
+        }
+
+        radixSortSimple(positives);
+        radixSortSimple(negatives);
+
+        for (int i = data.size() - 1; i >= 0; i--) {
+            data.remove(i);
+        }
+
+        for (int i = negatives.size() - 1; i >= 0; i--) {
+            data.add(negatives.get(i) * -1);
+        }
+
+        data.extend(zeroes);
+        data.extend(positives);
+    }
 }
