@@ -12,4 +12,10 @@ public class Radix {
             original.extend(buckets[i]);
         }
     }
+
+    public static void merge(SortableLinkedList original, SortableLinkedList[] buckets) {
+        for (int i = 0; i < buckets.length; i++) {
+            original.extend(buckets[i]);
+        }
+    }
 }

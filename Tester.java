@@ -26,25 +26,25 @@ public class Tester {
             except(test, e);
         }
 
-        test = "Radix.merge(MyLinkedList original, MyLinkedList[] buckets)";
+        test = "Radix.merge(SortableLinkedList original, SortableLinkedList[] buckets)";
         try {
-            MyLinkedList a = new MyLinkedList();
-            MyLinkedList b = new MyLinkedList();
-            MyLinkedList c = new MyLinkedList();
-            MyLinkedList d = new MyLinkedList();
-            MyLinkedList e = new MyLinkedList();
-            MyLinkedList f = new MyLinkedList();
+            SortableLinkedList a = new SortableLinkedList();
+            SortableLinkedList b = new SortableLinkedList();
+            SortableLinkedList c = new SortableLinkedList();
+            SortableLinkedList d = new SortableLinkedList();
+            SortableLinkedList e = new SortableLinkedList();
+            SortableLinkedList f = new SortableLinkedList();
 
-            MyLinkedList[] buckets = {b, c, d, e, f};
+            SortableLinkedList[] buckets = {b, c, d, e, f};
 
-            a.add("1");
-            a.add("2");
-            a.add("3");
+            a.add(1);
+            a.add(2);
+            a.add(3);
 
             for (int i = 0; i < buckets.length; i++) {
-                buckets[i].add("1" + i);
-                buckets[i].add("2" + i);
-                buckets[i].add("3" + i);
+                buckets[i].add(10 + i);
+                buckets[i].add(20 + i);
+                buckets[i].add(30 + i);
             }
 
             Radix.merge(a, buckets);
