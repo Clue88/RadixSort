@@ -1,9 +1,14 @@
 /******************************************************************************
  *  Compilation:  javac Tester.java
- *  Execution:    java Tester [DEBUG]
+ *  Execution:    java Tester [DEBUG] [numTests=NUM_TESTS] [arraySize=ARRAY_SIZE]
  *
  *  DEBUG: Whether to add extra outputs (seed, error output). Defaults true.
+ *  numTests: The number of trials per sorting method used.
+ *  arraySize: The size of arrays used per trial.
  ******************************************************************************/
+
+import java.util.Random;
+import java.util.Arrays;
 
 public class Tester {
     public static int ERR = 0;
@@ -11,6 +16,17 @@ public class Tester {
     public static void main(String[] args) {
         if (args.length > 0 && Boolean.parseBoolean(args[0]) == false) DEBUG = false;
         String test = "";
+        int numTests = 1; // 100
+        int arraySize = 5; // 10
+
+        for (int i = 0; i < args.length; i++) {
+            if (args[i].split("=")[0].equals("numTests")) {
+                numTests = Integer.parseInt(args[i].split("=")[1]);
+            }
+            if (args[i].split("=")[0].equals("arraySize")) {
+                arraySize = Integer.parseInt(args[i].split("=")[1]);
+            }
+        }
 
         test = "Radix.nth(int n, int col)";
         try {
@@ -51,6 +67,27 @@ public class Tester {
             check(test, a.toString(), "[1, 2, 3, 10, 20, 30, 11, 21, 31, 12, 22, 32, 13, 23, 33, 14, 24, 34]");
             check(test, b.toString(), "[]");
             check(test, e.toString(), "[]");
+        } catch(RuntimeException e) {
+            except(test, e);
+        }
+
+        test = "Radix.radixSortSimple(SortableLinkedList data)";
+        try {
+            Random rng = new Random();
+            for (int i = 0; i < numTests; i++) {
+                int seed = rng.nextInt();
+                SortableLinkedList arSort = new SortableLinkedList();
+                int[] arOrig = new int[arraySize];
+                Random rand = new Random(seed);
+                for (int j = 0; j < arraySize; j++) {
+                    int num = rand.nextInt() % 1000;
+                    arSort.add(num);
+                    arOrig[j] = num;
+                }
+                Radix.radixSortSimple(arSort);
+                Arrays.sort(arOrig);
+                check(test, arSort.toString(), Arrays.toString(arOrig), seed);
+            }
         } catch(RuntimeException e) {
             except(test, e);
         }

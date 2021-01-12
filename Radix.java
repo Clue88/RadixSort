@@ -12,4 +12,13 @@ public class Radix {
             original.extend(buckets[i]);
         }
     }
+
+    public static void radixSortSimple(SortableLinkedList data) {
+        int maxLength = 0;
+        for (int i = 0; i < data.size(); i++) {
+            int len = length(data.get(i));
+            if (len > maxLength) maxLength = len;
+        }
+        System.out.println(maxLength);
+    }
 }
