@@ -16,8 +16,8 @@ public class Tester {
     public static void main(String[] args) {
         if (args.length > 0 && Boolean.parseBoolean(args[0]) == false) DEBUG = false;
         String test = "";
-        int numTests = 1; // 100
-        int arraySize = 5; // 10
+        int numTests = 100;
+        int arraySize = 10;
 
         for (int i = 0; i < args.length; i++) {
             if (args[i].split("=")[0].equals("numTests")) {
@@ -31,6 +31,7 @@ public class Tester {
         test = "Radix.nth(int n, int col)";
         try {
             check(test, Radix.nth(12902, 2), 9);
+            check(test, Radix.nth(12902, 10), 0);
         } catch(RuntimeException e) {
             except(test, e);
         }
@@ -71,6 +72,8 @@ public class Tester {
             except(test, e);
         }
 
+        
+
         test = "Radix.radixSortSimple(SortableLinkedList data)";
         try {
             Random rng = new Random();
@@ -81,6 +84,7 @@ public class Tester {
                 Random rand = new Random(seed);
                 for (int j = 0; j < arraySize; j++) {
                     int num = rand.nextInt() % 1000;
+                    if (num < 0) num *= -1;
                     arSort.add(num);
                     arOrig[j] = num;
                 }
