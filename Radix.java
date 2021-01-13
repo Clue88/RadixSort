@@ -16,7 +16,8 @@ public class Radix {
     public static void radixSortSimple(SortableLinkedList data) {
         int maxLength = 0;
         for (int i = 0; i < data.size(); i++) {
-            if (data.get(i) > maxLength) maxLength = data.get(i);
+            if (data.get(0) > maxLength) maxLength = data.get(0);
+            data.add(data.remove(0));
         }
         maxLength = length(maxLength);
 
