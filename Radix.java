@@ -14,22 +14,13 @@ public class Radix {
     }
 
     public static void radixSortSimple(SortableLinkedList data) {
-        int maxLength = 0;
+        int maxLength = 1;
         SortableLinkedList[] buckets = new SortableLinkedList[10];
         for (int i = 0; i < buckets.length; i++) buckets[i] = new SortableLinkedList();
 
-        while (data.size() > 0) {
-            int digit = nth(data.get(0), 0);
-            buckets[digit].add(data.get(0));
-            if (data.get(0) > maxLength) maxLength = data.get(0);
-            data.remove(0);
-        }
-        Radix.merge(data, buckets);
-
-        maxLength = length(maxLength);
-
-        for (int i = 1; i < maxLength; i++) {
+        for (int i = 0; i < maxLength; i++) {
             while (data.size() > 0) {
+                if (i == 0 && length(data.get(0)) > maxLength) maxLength = length(data.get(0));
                 int digit = nth(data.get(0), i);
                 buckets[digit].add(data.get(0));
                 data.remove(0);
