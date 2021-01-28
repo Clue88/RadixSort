@@ -32,13 +32,11 @@ public class Radix {
     public static void radixSort(SortableLinkedList data) {
         SortableLinkedList positives = new SortableLinkedList();
         SortableLinkedList negatives = new SortableLinkedList();
-        SortableLinkedList zeroes = new SortableLinkedList();
 
         while (data.size() > 0) {
             int num = data.get(0);
-            if (num > 0) positives.add(num);
-            else if (num < 0) negatives.add(num * -1);
-            else zeroes.add(num);
+            if (num >= 0) positives.add(num);
+            else negatives.add(num * -1);
             data.remove(0);
         }
 
@@ -50,7 +48,6 @@ public class Radix {
             negatives.remove(negatives.size() - 1);
         }
 
-        data.extend(zeroes);
         data.extend(positives);
     }
 }
